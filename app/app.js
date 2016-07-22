@@ -29,12 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const status = document.getElementById('status');
   const movie = document.getElementById('movie');
   const playlist = document.getElementById('playlist');
-  const movieBox = document.getElementById('movie-box');
 
   function cleanup() {
     playlist.innerHTML = '';
     movie.innerHTML = '';
-    movieBox.innerHTML = '';
   }
 
   const search = new Autocomplete({
@@ -71,16 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
           const episodeElm = document.createElement('a');
           episodeElm.innerHTML = episode.name;
           episodeElm.classList.add('episode');
-          episodeElm.href = episode.source;
 
           episodeElm.addEventListener('click', e => {
             e.preventDefault();
             e.stopPropagation();
 
             episodeElm.classList.add('played-episode');
-            movieBox.innerHTML = `
-              <iframe src="${episode.source}"></iframe>
-            `;
+
+            statusChange(`Start playing episode from ${episode.source}`);
+
+            try {
+              const episodeProcess = seasonvarcik.play(episode.source);
+              console.log(`Started VLC#${episodeProcess.pid} playing ${episode.source}`);
+            } catch (e) {
+              statusChange(`Error playing episode ${episode.source}: ${e.message}`, 'error');
+            }
 
             return false;
           });
@@ -125,7 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   try {
     statusChange('Initializing engine...');
-    seasonvarcik.init().then(seasonvarcik => {
+
+    seasonvarcik.init().catch(e => {
+      statusChange(`Error loading engine: ${e.message}`, 'error');
+    }).then(() => {
       statusChange(`Security mark obtained: ${seasonvarcik.securityMark}`);
     });
   } catch (e) {

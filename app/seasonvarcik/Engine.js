@@ -2,12 +2,19 @@ import {SecurityMark} from './SecurityMark';
 import {Playlist} from './Playlist';
 import request from 'request';
 import Document from 'html-document';
+import {exec} from 'child_process';
+import {spawn} from 'child_process';
 
 export class Engine {
   constructor(baseUrl = Engine.BASE_URL) {
     this.baseUrl = baseUrl;
     this._securityMark = null;
+    this._vlcBinary = null;
     this._initialized = false;
+  }
+
+  get vlcBinary() {
+    return this._vlcBinary;
   }
 
   get securityMark() {
@@ -44,11 +51,41 @@ export class Engine {
         return resolve(this);
       }
 
-      SecurityMark.fetch(this).catch(reject).then(securityMark => {
-        this._securityMark = securityMark.toString();
+      Promise.all([
+        SecurityMark.fetch(this).then(securityMark => {
+          this._securityMark = securityMark.toString();
+        }),
+        this._detectVLC().then(vlcBinary => {
+          this._vlcBinary = vlcBinary;
+        }),
+      ]).catch(reject).then(() => {
         this._initialized = true;
+        resolve();
+      });
+    });
+  }
 
-        resolve(this);
+  play(sourceUrl) {
+    if (!this._vlcBinary) {
+      throw new Error('Missing VLC binaries');
+    }
+
+    let episodeProcess = spawn(this._vlcBinary, [sourceUrl]);
+
+    episodeProcess.stdout.pipe(process.stdout);
+    episodeProcess.stderr.pipe(process.stderr);
+
+    return episodeProcess;
+  }
+
+  _detectVLC() {
+    return new Promise((resolve, reject) => {
+      exec('find /Applications -iname vlc.app -print -quit', (error, stdout, stderr) => {
+        if (error || !stdout.trim()) {
+          return reject(new Error(`Missing VLC Player binaries`));
+        }
+
+        resolve(stdout.trim() + '/Contents/MacOS/VLC');
       });
     });
   }

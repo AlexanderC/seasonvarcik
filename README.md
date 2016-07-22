@@ -6,6 +6,12 @@ viewing any moovies (even blocked in your country) from [Seasonvar.ru](http://se
 
 > Built on top of [electron-boilerplate](https://github.com/szwacz/electron-boilerplate) boilerplate application
 
+Requirements
+------------
+
+ - MacOS (tested on 10.11.x)
+ - [VLC Player](http://www.videolan.org/vlc/index.html)
+
 # License
 
 The MIT License (MIT)
