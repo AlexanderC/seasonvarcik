@@ -12,6 +12,13 @@ Requirements
  - MacOS (tested on 10.11.x)
  - [VLC Player](http://www.videolan.org/vlc/index.html)
 
+Installation
+------------
+
+ - Download [seasonvarcik-vX.X.X-darwin-x64.dmg](https://github.com/AlexanderC/seasonvarcik/releases/latest) where `vX.X.X` is the tag version
+ - Trust apps installation from unidentified sources
+ - Install & enjoy ;)
+
 # License
 
 The MIT License (MIT)
