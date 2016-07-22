@@ -1,13 +1,15 @@
 {
-  "name": "electron-boilerplate",
-  "productName": "Electron Boilerplate",
-  "description": "Starter for your Electron application. Out of the box ready for serious stuff.",
+  "name": "seasonvarcik",
+  "productName": "Seasonvarcik",
+  "description": "Make Seasonvar.ru, not war!",
   "version": "0.1.0",
-  "author": "Mr Gumby",
-  "copyright": "© 2016, your company here",
+  "author": "AlexanderC <self@alexanderc.me>",
+  "copyright": "© 2016, AlexanderC",
   "main": "background.js",
   "dependencies": {
-    "fs-jetpack": "^0.9.0"
+    "fs-jetpack": "^0.9.0",
+    "request": "^2.73.0",
+    "html-document": "https://github.com/christophehurpeau/html-document"
   },
   "packageNameTemplate": "{{name}}-v{{version}}-{{platform}}-{{arch}}",
   "osx": {

@@ -1,27 +1,32 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Electron Boilerplate</title>
+   <meta charset="utf-8">
+   <title>Seasonvarcik</title>
 
-    <link href="stylesheets/main.css" rel="stylesheet" type="text/css">
+   <link rel="icon" type="image/x-icon" href="http://cdn.seasonvar.ru/images/fav/favicon.ico" />
+   <link rel="shortcut icon" type="image/x-icon" href="http://cdn.seasonvar.ru/images/fav/favicon.ico" />
+   <link rel="apple-touch-icon" href="http://cdn.seasonvar.ru/images/fav/apple-touch-icon-57x57.png" />
+   <link rel="apple-touch-icon" sizes="72x72" href="http://cdn.seasonvar.ru/images/fav/apple-touch-icon-72x72.png" />
+   <link rel="apple-touch-icon" sizes="114x114" href="http://cdn.seasonvar.ru/images/fav/apple-touch-icon-114x114.png" />
+   <link rel="apple-touch-icon" sizes="144x144" href="http://cdn.seasonvar.ru/images/fav/apple-touch-icon-144x144.png" />
+   <link rel="apple-touch-icon-precomposed" href="http://cdn.seasonvar.ru/images/fav/apple-touch-icon-57x57.png" />
 
-    <script src="helpers/context_menu.js"></script>
-    <script src="helpers/external_links.js"></script>
+   <link href="stylesheets/main.css" rel="stylesheet" type="text/css">
 
-    <script src="app.js"></script>
+   <script src="helpers/context_menu.js"></script>
+   <script src="helpers/external_links.js"></script>
+
+   <script src="app.js"></script>
 </head>
 <body>
-
-    <div class="container">
-        <h1 id="greet"></h1>
-        <p class="subtitle">
-            Welcome to <a href="http://electron.atom.io" class="js-external-link">Electron</a> app running on this magnificent <strong id="platform-info"></strong> machine.
-        </p>
-        <p class="subtitle">
-            You are in <strong id="env-name"></strong> environment.
-        </p>
-    </div>
-
+  <div id="status"></div>
+  <div id="autocomplete">
+    <label for="search">Search for a movie:</label>
+    <input type="text" id="search" name="search"/>
+  </div>
+  <div id="movie"></div>
+  <div id="movie-box"></div>
+  <div id="playlist"></div>
 </body>
 </html>
