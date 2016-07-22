@@ -2,7 +2,7 @@
   "name": "seasonvarcik",
   "productName": "Seasonvarcik",
   "description": "Make Seasonvar.ru, not war!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "AlexanderC <self@alexanderc.me>",
   "copyright": "© 2016, AlexanderC",
   "main": "background.js",
