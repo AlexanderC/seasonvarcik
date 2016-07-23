@@ -16,8 +16,8 @@ export class Playlist {
       let titleParts = item.comment.split('<br>');
       let title = titleParts[0];
 
-      if (titleParts.length > 1) {
-        title += ` [${titleParts[1]}]`;
+      if (titleParts.length > 1 && titleParts[1].trim()) {
+        title += ` [${titleParts[1].trim()}]`;
       }
 
       return {
