@@ -65,12 +65,42 @@ export class Engine {
     });
   }
 
-  play(sourceUrl) {
+  playPlaylist(playlist, ...episodes) {
+    return new Promise((resolve, reject) => {
+      if (!this._vlcBinary) {
+        return reject(new Error('Missing VLC binaries'));
+      }
+
+      playlist.createPls(...episodes).catch(reject).then(plsPath => {
+        const episodeProcess = spawn(this._vlcBinary, [plsPath]);
+
+        episodeProcess.stdout.pipe(process.stdout);
+        episodeProcess.stderr.pipe(process.stderr);
+
+        resolve({episodeProcess, plsPath});
+      });
+    });
+  }
+
+  play(...episodes) {
     if (!this._vlcBinary) {
       throw new Error('Missing VLC binaries');
     }
 
-    let episodeProcess = spawn(this._vlcBinary, [sourceUrl]);
+    let opts = [];
+
+    if (episodes.length === 1) {
+      opts.push('--no-playlist-tree');
+      opts.push(`--meta-title=${episodes[0].name}`); // TODO escape the episode name
+    } else {
+      opts.push('--playlist-tree');
+      opts.push('--no-auto-preparse');
+    }
+
+    const episodeProcess = spawn(
+      this._vlcBinary,
+      opts.concat(episodes.map(e => e.source))
+    );
 
     episodeProcess.stdout.pipe(process.stdout);
     episodeProcess.stderr.pipe(process.stderr);

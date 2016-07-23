@@ -2,14 +2,15 @@
   "name": "seasonvarcik",
   "productName": "Seasonvarcik",
   "description": "Make Seasonvar.ru, not war!",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "AlexanderC <self@alexanderc.me>",
   "copyright": "© 2016, AlexanderC",
   "main": "background.js",
   "dependencies": {
     "fs-jetpack": "^0.9.0",
     "request": "^2.73.0",
-    "html-document": "https://github.com/christophehurpeau/html-document"
+    "html-document": "https://github.com/christophehurpeau/html-document",
+    "mktemp": "^0.4.0"
   },
   "packageNameTemplate": "{{name}}-v{{version}}-{{platform}}-{{arch}}",
   "osx": {

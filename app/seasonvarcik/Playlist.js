@@ -1,3 +1,7 @@
+import mktemp from 'mktemp';
+import fs from 'fs';
+import os from 'os';
+
 export class Playlist {
   constructor(engine, movieId) {
     this.engine = engine;
@@ -9,10 +13,42 @@ export class Playlist {
     this._ensureFetched();
 
     return this.rawPlaylist.playlist.map(item => {
+      let titleParts = item.comment.split('<br>');
+      let title = titleParts[0];
+
+      if (titleParts.length > 1) {
+        title += ` [${titleParts[1]}]`;
+      }
+
       return {
-        name: item.comment,
+        name: title,
         source: item.file,
       };
+    });
+  }
+
+  createPls(...episodes) {
+    return new Promise((resolve, reject) => {
+      episodes = episodes.length <= 0 ? this.episodes : episodes;
+
+      mktemp.createFile(`${os.tmpdir()}/${this.movieId}-XXXXX.pls`).catch(reject)
+        .then(plsPath => {
+          let plsContent = `[playlist]
+
+NumberOfEntries=${episodes.length}
+`;
+
+          episodes.forEach((episode, i) => {
+            plsContent += `
+File${i + 1}=${episode.source}
+Title${i + 1}=${episode.name}
+`;
+          });
+
+          fs.writeFile(plsPath, plsContent, error => {
+            error ? reject(error) : resolve(plsPath);
+          });
+        });
     });
   }
 

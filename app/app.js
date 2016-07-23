@@ -65,6 +65,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         statusChange(`Movie playlist obtained (${episodes.length} episode/s)`);
 
+        const allEpisodesElm = document.createElement('a');
+        allEpisodesElm.innerHTML = 'Play All';
+        allEpisodesElm.classList.add('episode');
+        allEpisodesElm.classList.add('episode-all');
+
+        allEpisodesElm.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          statusChange(`Start playing ${episodes.length} episode/s`);
+
+          seasonvarcik.playPlaylist(playlistObj).catch(e => {
+            statusChange(`Error playing ${episodes.length} episode/s: ${e.message}`, 'error');
+          }).then(resultObj => {
+            console.log(`Started VLC#${resultObj.episodeProcess.pid} playing ${episodes.length} episode/s [${resultObj.plsPath}]`);
+          });
+
+          return false;
+        });
+
+        playlist.appendChild(allEpisodesElm);
+
         episodes.forEach(episode => {
           const episodeElm = document.createElement('a');
           episodeElm.innerHTML = episode.name;
@@ -79,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusChange(`Start playing episode from ${episode.source}`);
 
             try {
-              const episodeProcess = seasonvarcik.play(episode.source);
+              const episodeProcess = seasonvarcik.play(episode);
               console.log(`Started VLC#${episodeProcess.pid} playing ${episode.source}`);
             } catch (e) {
               statusChange(`Error playing episode ${episode.source}: ${e.message}`, 'error');
