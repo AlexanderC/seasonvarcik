@@ -25,8 +25,16 @@ export class Engine {
     return `${this.baseUrl}/autocomplete.php`;
   }
 
+  get cdnBaseUrl() {
+    return this.baseUrl.replace(/^(https?:\/\/)(.+)$/i, '$1cdn.$2');
+  }
+
   get autocompleteParam() {
     return 'query';
+  }
+
+  coverImage(movieId) {
+    return `${this.cdnBaseUrl}/oblojka/${movieId}.jpg`;
   }
 
   playlist(movieId) {

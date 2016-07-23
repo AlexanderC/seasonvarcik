@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
       key: seasonvarcik.autocompleteParam,
     },
     onResult: (rawMovieObj, searchEngine) => {
-      searchEngine.clearResults();
       const movieObj = JSON.parse(rawMovieObj);
+
+      searchEngine.clearResults();
 
       cleanup();
 
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <br/>
           <a href="${movieObj.url}" class="js-external-link">${movieObj.title}</a>
         </p>
+        <img alt="${movieObj.title}" src="${movieObj.cover}">
       `;
 
       statusChange('Fetching movie playlist...');
@@ -132,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: response.suggestions[i],
             id: response.id[i],
             url: seasonvarcik.url(response.data[i]),
+            cover: seasonvarcik.coverImage(response.id[i]),
           });
         }
 
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemContainer = document.createElement('div');
         itemContainer.classList.add('autocomplete-item');
         itemContainer.dataset.autocompleteValue = JSON.stringify(item);
-        itemContainer.innerHTML = item.title;
+        itemContainer.innerHTML = `<img alt="${item.title}" src="${item.cover}"><div>${item.title}</div>`;
 
         return itemContainer.outerHTML;
       }

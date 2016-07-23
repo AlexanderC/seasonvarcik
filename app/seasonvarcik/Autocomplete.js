@@ -67,7 +67,7 @@ export class Autocomplete {
             this.focusPreviousResult();
             break;
           case KEY_ENTER:
-            this.updateValue(document.querySelector('.autocomplete-item--focus').innerText);
+            this.updateValue(document.querySelector('.autocomplete-item--focus').dataset.autocompleteValue);
             this.hideResults();
             break;
           case KEY_DEL:
@@ -89,7 +89,7 @@ export class Autocomplete {
         const item = e.target;
 
         if (!item.classList.contains('autocomplete-item--no-result')) {
-          this.updateValue(item.getAttribute('data-autocomplete-value'));
+          this.updateValue(item.parentNode.dataset.autocompleteValue);
           this.hideResults();
         }
       });
