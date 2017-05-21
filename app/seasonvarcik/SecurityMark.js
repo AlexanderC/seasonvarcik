@@ -20,7 +20,7 @@ export class SecurityMark {
       }).then(moviePage => {
         try {
           const rawSecurityMark = moviePage.body.textContent
-            .match(/var\s+secureMark\s*=\s*"([^"]+)";/)[1];
+            .match(/'secureMark': '(\w+)',/)[1];
 
           if (!rawSecurityMark) {
             throw new Error(`Unable to find security mark on page ${moviePath}`);
@@ -37,7 +37,7 @@ export class SecurityMark {
   static fetch(engine) {
     return new Promise((resolve, reject) => {
       engine.fetch().catch(reject).then(mainPage => {
-        let films = mainPage.body.querySelectorAll('div.film-list-item');
+        let films = mainPage.body.querySelectorAll('[data-id]');
 
         if (films.length <= 0) {
           return reject(new Error('There are no films available'));
@@ -45,7 +45,7 @@ export class SecurityMark {
 
         SecurityMark._fetchSecurityMarkStack(
           engine,
-          films.map(movie => movie.querySelector('a').href)
+          films.map(movie => movie.href)
         ).catch(reject).then(rawSecurityMark => {
           if (!rawSecurityMark) {
             return reject(new Error('Unable to fetch security mark'));
