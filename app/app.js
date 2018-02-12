@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let responseVector = [];
         response.id = response.id || [];
 
-        for (let i = 0; i < response.suggestions.length; i++) {
-          if (response.suggestions[i].indexOf('<span') === 0) {
+        for (let i = 0; i < response.suggestions.valu.length; i++) {
+          if (response.suggestions.valu[i].indexOf('<span') === 0) {
             break;
           } else if (!response.data.hasOwnProperty(i) ||
             !response.id.hasOwnProperty(i)) {
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           responseVector.push({
-            title: response.suggestions[i],
+            title: response.suggestions.valu[i],
             id: response.id[i],
             url: seasonvarcik.url(response.data[i]),
             cover: seasonvarcik.coverImage(response.id[i]),
