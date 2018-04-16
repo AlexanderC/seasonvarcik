@@ -1,0 +1,12 @@
+{
+  "dest": "dist/installers/",
+  "icon": "resources/Icon.ico",
+  "tags": [
+    "Seasonvar",
+    "seasonvar.ru",
+    "Movies",
+    "Watch Online",
+    "Episodes",
+    "Films"
+  ]
+}

@@ -1,31 +1,67 @@
 {
-  "devDependencies": {
-    "asar": "^0.11.0",
-    "chai": "^3.5.0",
-    "electron-mocha": "^2.0.0",
-    "electron-prebuilt": "^1.0.1",
-    "fs-jetpack": "^0.9.0",
-    "gulp": "^3.9.0",
-    "gulp-batch": "^1.0.5",
-    "gulp-less": "^3.0.3",
-    "gulp-plumber": "^1.1.0",
-    "gulp-util": "^3.0.6",
-    "gulp-watch": "^4.3.5",
-    "q": "^1.4.1",
-    "rollup": "^0.26.3",
-    "yargs": "^4.2.0"
-  },
-  "optionalDependencies": {
-    "appdmg": "^0.3.2",
-    "rcedit": "^0.5.0"
-  },
+  "name": "seasonvarcik",
+  "version": "2.0.0",
+  "description": "seasonvar.ru player",
+  "main": "src/app.js",
   "scripts": {
-    "postinstall": "cd app && npm install",
-    "build": "gulp build",
-    "release": "gulp release --env=production",
-    "start": "gulp start",
-    "pretest": "gulp build --env=test",
-    "test": "electron-mocha build --renderer",
-    "install-native": "node ./tasks/install_native_module"
+    "start": "electron src/app.js",
+    "watch:ui": "webpack --progress --colors --watch",
+    "make": "npm run build && npm run dist",
+    "build": "npm run build:ui && npm run build:app",
+    "build:ui": "webpack",
+    "build:app": "electron-packager . app --platform win32 --arch x64 --out dist/",
+    "dist": "electron-installer-windows --src dist/app-win32-x64/ --config win.dist.json"
+  },
+  "electron": {
+    "title": "Seasonvarcik"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderC/seasonvarcik.git"
+  },
+  "keywords": [
+    "seasonvar.ru",
+    "seasonvar",
+    "electron",
+    "serialy"
+  ],
+  "author": "AlexanderC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexanderC/seasonvarcik/issues"
+  },
+  "homepage": "https://github.com/AlexanderC/seasonvarcik#readme",
+  "dependencies": {
+    "debounce": "^1.1.0",
+    "debug": "^3.1.0",
+    "electron-ipc-socket": "^1.2.4",
+    "electron-menu-plus": "^1.0.0",
+    "object.values": "^1.0.4",
+    "pify": "^3.0.0",
+    "seasonvar-api-nokey": "^1.1.3",
+    "video.js": "^6.7.3",
+    "vue": "^2.5.16",
+    "vue-material": "^1.0.0-beta-8",
+    "vue-video-player": "^5.0.2",
+    "vue2-animate": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2017": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "electron": "^1.8.4",
+    "electron-installer-windows": "^1.0.2",
+    "electron-packager": "^12.0.1",
+    "electron-prebuilt": "^1.4.13",
+    "electron-reload": "^1.2.2",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^14.2.2",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   }
 }
