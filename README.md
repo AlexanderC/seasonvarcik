@@ -2,43 +2,45 @@ seasonvarcik
 ============
 
 `seasonvarcik` is an [Electron](http://electron.atom.io) based desktop application for
-viewing any moovies (even blocked in your country) from [Seasonvar.ru](http://seasonvar.ru) stress free!
+viewing any movies (even blocked in your country) from [Seasonvar.ru](http://seasonvar.ru) stress free!
 
-> Built on top of [electron-boilerplate](https://github.com/szwacz/electron-boilerplate) boilerplate application
+> Built using [seasonvar-api-nokey](https://github.com/AlexanderC/seasonvar-api)
 
-Requirements
-------------
+# Prerequisites
 
- - MacOS (tested on 10.11.x)
- - [VLC Player](http://www.videolan.org/vlc/index.html)
+- Node.js >=8.x
 
-Installation
-------------
+# Installation and Usage
 
- - Download [seasonvarcik-vX.X.X-darwin-x64.dmg](https://github.com/AlexanderC/seasonvarcik/releases/latest) where `vX.X.X` is the tag version
- - Trust apps installation from unidentified sources
- - Install & enjoy ;)
+Installation:
 
-# License
+```bash
+npm install
+```
 
-The MIT License (MIT)
+Development:
 
-Copyright (c) 2015-2016 Jakub Szwacz
+```bash
+npm run watch:ui
+npm run start
+```
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Distribution:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+```bash
+npm run make
+```
+# Roadmap
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- [ ] Add support for i18n
+- [ ] Allow choosing episode's sound column (translation)
+- [ ] Add some abstractions
+- [ ] Add multiple providers
+
+# Support development
+
+I really love open source, however i do need your help to
+keep the library up to date. There are several ways to do it:
+open issues, submit PRs, share the library w/ community or simply-
+
+<a href="https://etherdonation.com/d?to=0x4a1eade6b3780b50582344c162a547d04e4e8e4a" target="_blank" title="Donate ETH"><img src="https://etherdonation.com/i/btn/donate-btn.png" alt="Donate ETH"/></a>
