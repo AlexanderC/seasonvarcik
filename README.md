@@ -6,11 +6,21 @@ viewing any movies (even blocked in your country) from [Seasonvar.ru](http://sea
 
 > Built using [seasonvar-api-nokey](https://github.com/AlexanderC/seasonvar-api)
 
-# Prerequisites
+# Screenshots
+
+![Main View](screenshots/main-view.png)
+![Player](screenshots/player.png)
+
+# Installation
+
+1. Download [latest release](https://github.com/AlexanderC/seasonvarcik/releases/latest).
+2. Install it or use portable version
+
+# Development
+
+Prerequisites:
 
 - Node.js >=8.x
-
-# Installation and Usage
 
 Installation:
 
@@ -28,7 +38,7 @@ npm run start
 Distribution:
 
 ```bash
-npm run make
+npm run build
 ```
 # Roadmap
 
@@ -36,6 +46,7 @@ npm run make
 - [ ] Allow choosing episode's sound column (translation)
 - [ ] Add some abstractions
 - [ ] Add multiple providers
+- [ ] Add realtime video processing (ML?) to skip builtin ads.
 
 # Support development
 
