@@ -6,11 +6,9 @@
   "scripts": {
     "start": "electron src/app.js",
     "watch:ui": "webpack --progress --colors --watch",
-    "make": "npm run build && npm run dist",
     "build": "npm run build:ui && npm run build:app",
     "build:ui": "webpack",
-    "build:app": "electron-packager . app --platform win32 --arch x64 --out dist/",
-    "dist": "electron-installer-windows --src dist/app-win32-x64/ --config win.dist.json"
+    "build:app": "electron-packager . --platform win32 --arch x64 --out dist/ --icon resources/Icon.ico --overwrite"
   },
   "electron": {
     "title": "Seasonvarcik"
@@ -51,7 +49,6 @@
     "babel-preset-es2017": "^6.24.1",
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
-    "electron-installer-windows": "^1.0.2",
     "electron-packager": "^12.0.1",
     "electron-prebuilt": "^1.4.13",
     "electron-reload": "^1.2.2",
